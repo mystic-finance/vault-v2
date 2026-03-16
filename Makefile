@@ -7,12 +7,14 @@ forge:
 deploy-fee-wrapper:
 	@FOUNDRY_PROFILE=no_via_ir forge create src/periphery/FeeWrapperDeployer.sol:FeeWrapperDeployer \
 		--rpc-url $(RPC_URL) \
-		--account $(ACCOUNT)
+		--account $(ACCOUNT) \
+		--broadcast
 
 deploy-adapter-factory:
 	@FOUNDRY_PROFILE=no_via_ir forge create src/adapters/MorphoVaultV1AdapterFactory.sol:MorphoVaultV1AdapterFactory \
 		--rpc-url $(RPC_URL) \
-		--account $(ACCOUNT)
+		--account $(ACCOUNT) \
+		--broadcast
 
 # Required variables for create-fee-wrapper:
 # DEPLOYER_ADDRESS, FACTORY, ADAPTER_FACTORY, OWNER, SALT, CHILD_VAULT
