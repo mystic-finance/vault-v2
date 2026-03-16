@@ -47,5 +47,28 @@ set-symbol:
 		--rpc-url $(RPC_URL) \
 		--account $(ACCOUNT)
 
+# Required variables for roles/recipients:
+# VAULT, RECIPIENT, NEW_OWNER, NEW_CURATOR
+submit-performance-fee-recipient:
+	cast send $(VAULT) "submit(bytes)" $$(cast calldata "setPerformanceFeeRecipient(address)" $(RECIPIENT)) \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
+set-performance-fee-recipient:
+	cast send $(VAULT) "setPerformanceFeeRecipient(address)" $(RECIPIENT) \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
+set-owner:
+	cast send $(VAULT) "setOwner(address)" $(NEW_OWNER) \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
+set-curator:
+	cast send $(VAULT) "setCurator(address)" $(NEW_CURATOR) \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
 .PHONY: forge deploy-fee-wrapper deploy-adapter-factory create-fee-wrapper \
-	submit-performance-fee set-performance-fee set-name set-symbol
+	submit-performance-fee set-performance-fee set-name set-symbol \
+	submit-performance-fee-recipient set-performance-fee-recipient set-owner set-curator
