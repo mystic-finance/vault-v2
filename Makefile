@@ -23,4 +23,27 @@ create-fee-wrapper:
 		--rpc-url $(RPC_URL) \
 		--account $(ACCOUNT)
 
-.PHONY: forge deploy-fee-wrapper deploy-adapter-factory create-fee-wrapper
+# Required variables for management:
+# VAULT, FEE, NAME, SYMBOL
+submit-performance-fee:
+	cast send $(VAULT) "submit(bytes)" $$(cast calldata "setPerformanceFee(uint256)" $(FEE)) \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
+set-performance-fee:
+	cast send $(VAULT) "setPerformanceFee(uint256)" $(FEE) \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
+set-name:
+	cast send $(VAULT) "setName(string)" "$(NAME)" \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
+set-symbol:
+	cast send $(VAULT) "setSymbol(string)" "$(SYMBOL)" \
+		--rpc-url $(RPC_URL) \
+		--account $(ACCOUNT)
+
+.PHONY: forge deploy-fee-wrapper deploy-adapter-factory create-fee-wrapper \
+	submit-performance-fee set-performance-fee set-name set-symbol
